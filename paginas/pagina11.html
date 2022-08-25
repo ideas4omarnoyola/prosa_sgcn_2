@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 11</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/estilos.css">
+
+    <!-- Librerias -->
+    <script src="../js/librerias/jquery.min.js"></script>
+    <script src="../js/librerias/gsap.min.js"></script>
+
+    <!-- Script de animaciones -->
+    <script src="../js/animaciones.js"></script>
+    <script src="../js/movimientosRobot.js"></script>
+    <!-- Scripts posicionar elementos -->
+    <script src="../js/redimensionarElementos.js"></script>
+    <script src="../js/posicionar.js"></script>
+
+</head>
+<body class="pagina">
+    <img class="elementos" id="titulo" src="../img/pagina11/titulo.png" data-posX="0" data-posY="0">
+    <img class="elementos" id="img01" src="../img/pagina11/img01.png" data-posX="0" data-posY="0">
+    <img class="elementos" id="img02" src="../img/pagina11/img02.png" data-posX="0" data-posY="0">
+
+    <img class="elementos" id="btn01" src="../img/pagina11/btn01.png" data-posX="280" data-posY="260">
+    <img class="elementos" id="btn02" src="../img/pagina11/btn02.png" data-posX="620" data-posY="260">
+
+    <img class="elementos" id="info01" src="../img/pagina11/info01.png" data-posX="0" data-posY="0">
+    <img class="elementos" id="info02" src="../img/pagina11/info02.png" data-posX="0" data-posY="0">
+
+    <img class="elementos" id="btnCerrar01" src="../img/pagina11/btnCerrar01.png" data-posX="710" data-posY="190">
+    <img class="elementos" id="btnCerrar02" src="../img/pagina11/btnCerrar02.png" data-posX="710" data-posY="190">
+
+    
+    <!-- Script de la página -->
+    <script>
+
+        // Variable----------------------------------------------------
+        let aplicacion = parent;
+
+        const titulo = $('#titulo');
+        const img01 = $('#img01');
+        const img02 = $('#img02');
+
+        const btn01 = $('#btn01');
+        const btn02 = $('#btn02');
+
+        const info01 = $('#info01');
+        const info02 = $('#info02');
+
+        const btnCerrar01 = $('#btnCerrar01');
+        const btnCerrar02 = $('#btnCerrar02');
+
+        let abrirBtn01 = false;
+        let abrirBtn02 = false;
+
+        // Audios------------------------------------------------------
+        const audio = [
+            new Audio('../audios/Prosa_Integracion_08_01.mp3'),
+            new Audio('../audios/Prosa_Integracion_08_02.mp3'),
+            new Audio('../audios/Prosa_Integracion_08_03.mp3'),
+        ]
+
+        // Al cargarse la página
+        $(window).on("load", function(){
+            redimensionarElementos();
+            aplicacion.cargando(iniciarContenido);
+        });
+
+        function iniciarContenido(){
+            aplicacion.reproducirAudio(audio[0], terminaDialogo, 1);
+            animacionEntrada(titulo, 'default', 1);
+            animacionEntrada(img01, 'default', 1, 1);
+            animacionEntrada(img02, 'default', 1, 2);
+            animacionEntrada(btn01, 'default', 1, 2);
+            animacionEntrada(btn02, 'default', 1, 2.5);
+
+        }
+
+        function terminaDialogo(){
+            parpadear(btn01);
+        }
+
+        btn01.click(function () {
+            if (btn01.css('cursor') == 'pointer') {
+                TweenMax.killTweensOf(btn01);
+    
+                dejarParpadear(btn01);
+                aplicacion.reproducirAudio(audio[1], terminaAudioBtn01, 1);
+                animacionEntrada(info01, 'default', 1, 1);
+            }
+        });
+
+        function terminaAudioBtn01() {
+            btn01.css({
+                'opacity': '1',
+                'cursor' : 'pointer'
+            });
+
+            parpadear(btnCerrar01);
+
+            btnCerrar01.click(function(){
+                if(btnCerrar01.css('cursor') == 'pointer'){
+                    TweenMax.killTweensOf(btnCerrar01);
+                    btnCerrar01.css({
+                        'opacity': '1',
+                    });
+
+                    dejarParpadear(btnCerrar01);
+                    animacionSalida(info01, 'default', 1, .5);
+                    animacionSalida(btnCerrar01, 'default', 1, .5);
+                }
+
+                if(!abrirBtn01){
+                    abrirBtn01 = true;
+                    setTimeout(()=>{
+                        parpadear(btn02);
+                    }, 2000);
+                }
+                
+            });
+        }
+
+        btn02.click(function () {
+            if (btn02.css('cursor') == 'pointer') {
+                TweenMax.killTweensOf(btn02);
+                btn02.css({
+                    'opacity': '1',
+                });
+                dejarParpadear(btn02);
+                aplicacion.reproducirAudio(audio[2], terminaAudioBtn02, 1);
+                animacionEntrada(info02, 'default', 1, 1);
+            }
+        });
+
+        function terminaAudioBtn02() {
+
+            btn02.css({
+                'opacity': '1',
+                'cursor' : 'pointer'
+            });
+
+            parpadear(btnCerrar02);
+
+            btnCerrar02.click(function(){
+                if(btnCerrar02.css('cursor') == 'pointer'){
+                    TweenMax.killTweensOf(btnCerrar02);
+                    btnCerrar02.css({
+                        'opacity': '1',
+                    });
+                    
+                    dejarParpadear(btnCerrar02);
+                    animacionSalida(info02, 'default', 1, .5);
+                    animacionSalida(btnCerrar02, 'default', 1, .5);
+
+                }
+
+                if(!abrirBtn02){
+                    abrirBtn02 = true;
+                    setTimeout(()=>{
+                        terminaPagina();
+                    }, 2000);
+                }
+
+            });
+        }
+
+        function terminaPagina(){
+            aplicacion.terminaPantalla();
+        }
+
+    </script>
+</body>
+</html>

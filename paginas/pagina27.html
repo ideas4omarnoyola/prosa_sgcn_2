@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 27</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/estilos.css">
+
+    <!-- Librerias -->
+    <script src="../js/librerias/jquery.min.js"></script>
+    <script src="../js/librerias/jquery-ui.min.js"></script>
+    <script src="../js/librerias/jquery.ui.touch-punch.min.js"></script>
+    <script src="../js/librerias/gsap.min.js"></script>
+
+    <!-- Script de animaciones -->
+    <script src="../js/animaciones.js"></script>
+    <script src="../js/movimientosRobot.js"></script>
+    <!-- Scripts posicionar elementos -->
+    <script src="../js/redimensionarElementos.js"></script>
+    <script src="../js/posicionar.js"></script>
+
+</head>
+<body class="pagina">
+
+    <img class="elementos" id="titulo" src="../img/pagina27/titulo.png" data-posX="0" data-posY="0"/>
+    <img class="elementos" id="instrucciones" src="../img/pagina27/instrucciones.png" data-posX="0" data-posY="0"/>
+    <img class="elementos" id="esquema" src="../img/pagina27/esquema.png" data-posX="0" data-posY="0"/>
+    
+    <div class="elementos drops" id="drop1" data-lugar="1"></div>
+    <div class="elementos drops" id="drop2" data-lugar="2"></div>
+    <div class="elementos drops" id="drop3" data-lugar="3"></div>
+    <div class="elementos drops" id="drop4" data-lugar="4"></div>
+    <div class="elementos drops" id="drop5" data-lugar="5"></div>
+    <div class="elementos drops" id="drop6" data-lugar="6"></div>
+    <div class="elementos drops" id="drop7" data-lugar="7"></div>
+    <div class="elementos drops" id="drop8" data-lugar="8"></div>
+    <div class="elementos drops" id="drop9" data-lugar="9"></div>
+    <div class="elementos drops" id="drop10" data-lugar="10"></div>
+
+    <img class="elementos arrastrables" id="drag1" data-lugar="1" src="../img/pagina27/drag1.png" data-posX="876" data-posY="123"/>
+    <img class="elementos arrastrables" id="drag2" data-lugar="2" src="../img/pagina27/drag2.png" data-posX="876" data-posY="166"/>
+    <img class="elementos arrastrables" id="drag3" data-lugar="3" src="../img/pagina27/drag3.png" data-posX="754" data-posY="383"/>
+    <img class="elementos arrastrables" id="drag4" data-lugar="4" src="../img/pagina27/drag4.png" data-posX="885" data-posY="383"/>
+    <img class="elementos arrastrables" id="drag5" data-lugar="5" src="../img/pagina27/drag5.png" data-posX="745" data-posY="308"/>
+    <img class="elementos arrastrables" id="drag6" data-lugar="6" src="../img/pagina27/drag6.png" data-posX="917" data-posY="320"/>
+    <img class="elementos arrastrables" id="drag7" data-lugar="7" src="../img/pagina27/drag7.png" data-posX="792" data-posY="211"/>
+    <img class="elementos arrastrables" id="drag8" data-lugar="8" src="../img/pagina27/drag8.png" data-posX="792" data-posY="433"/>
+    <img class="elementos arrastrables" id="drag9" data-lugar="9" src="../img/pagina27/drag9.png" data-posX="756" data-posY="121"/>
+    <img class="elementos arrastrables" id="drag10" data-lugar="10" src="../img/pagina27/drag10.png" data-posX="756" data-posY="167"/>
+    
+    <!-- Script de la página -->
+    <script>
+
+        // Variable----------------------------------------------------
+        let aplicacion = parent;
+        const titulo = $('#titulo');
+        const instrucciones = $('#instrucciones');
+        const esquema = $('#esquema');
+        const drag1 = $('#drag1');
+        const drag2 = $('#drag2');
+        const drag3 = $('#drag3');
+        const drag4 = $('#drag4');
+        const drag5 = $('#drag5');
+        const drag6 = $('#drag6');
+        const drag7 = $('#drag7');
+        const drag8 = $('#drag8');
+        const drag9 = $('#drag9');
+        const drag10 = $('#drag10');
+        const drop1 = $('#drop1');
+        const drop2 = $('#drop2');
+        const drop3 = $('#drop3');
+        const drop4 = $('#drop4');
+        const drop5 = $('#drop5');
+        const drop6 = $('#drop6');
+        const drop7 = $('#drop7');
+        const drop8 = $('#drop8');
+        const drop9 = $('#drop9');
+        const drop10 = $('#drop10');
+
+        const arrastrables = $('.arrastrables');
+        arrastrables.css('cursor', 'pointer');
+
+        const drops = $('.drops');
+        drops.css('background', 'transparent');
+
+        drop1.css({
+            'width': '125px',
+            'height': '36px',
+            'top': '224px',
+            'left': '594px'
+        });
+        
+        drop2.css({
+            'width': '125px',
+            'height': '36px',
+            'top': '384px',
+            'left': '595px'
+        });
+        
+        drop3.css({
+            'width': '125px',
+            'height': '36px',
+            'top': '183px',
+            'left': '594px'
+        });
+        
+        drop4.css({
+            'width': '125px',
+            'height': '36px',
+            'top': '306px',
+            'left': '594px'
+        });
+        
+        drop5.css({
+            'width': '164px',
+            'height': '62px',
+            'top': '318px',
+            'left': '120px'
+        });
+        
+        drop6.css({
+            'width': '89px',
+            'height': '36px',
+            'top': '334px',
+            'left': '474px'
+        });
+        
+        drop7.css({
+            'width': '164px',
+            'height': '87px',
+            'top': '391px',
+            'left': '120px'
+        });
+        
+        drop8.css({
+            'width': '164px',
+            'height': '87px',
+            'top': '395px',
+            'left': '300px'
+        });
+        
+        drop9.css({
+            'width': '90px',
+            'height': '36px',
+            'top': '219px',
+            'left': '20px'
+        });
+        
+        drop10.css({
+            'width': '90px',
+            'height': '36px',
+            'top': '334px',
+            'left': '20px'
+        });
+
+        let dragSelect;
+        let dropSelect;
+        let aciertos = 0;
+
+        // Audios------------------------------------------------------
+        const audio = [
+            new Audio('../audios/Prosa_Integracion_01_01.mp3')
+        ]
+
+        // Al cargarse la página
+        $(window).on("load", function(){
+            redimensionarElementos();
+            aplicacion.cargando(iniciarContenido);
+        });
+
+        function iniciarContenido(){
+            aplicacion.reproducirAudio(audio[0], actividad, 2);
+            animacionEntrada(titulo, 'default', 1, 1);
+            animacionEntrada(instrucciones, 'default', 1, 1);
+            animacionEntrada(esquema, 'default', 1, 1);
+            animacionEntrada(drag1, 'default', 1, 1);
+            animacionEntrada(drag2, 'default', 1, 1);
+            animacionEntrada(drag3, 'default', 1, 1);
+            animacionEntrada(drag4, 'default', 1, 1);
+            animacionEntrada(drag5, 'default', 1, 1);
+            animacionEntrada(drag6, 'default', 1, 1);
+            animacionEntrada(drag7, 'default', 1, 1);
+            animacionEntrada(drag8, 'default', 1, 1);
+            animacionEntrada(drag9, 'default', 1, 1);
+            animacionEntrada(drag10, 'default', 1, 1);
+            animacionEntrada(drop1, 'default', 1, 1);
+            animacionEntrada(drop2, 'default', 1, 1);
+            animacionEntrada(drop3, 'default', 1, 1);
+            animacionEntrada(drop4, 'default', 1, 1);
+            animacionEntrada(drop5, 'default', 1, 1);
+            animacionEntrada(drop6, 'default', 1, 1);
+            animacionEntrada(drop7, 'default', 1, 1);
+            animacionEntrada(drop8, 'default', 1, 1);
+            animacionEntrada(drop9, 'default', 1, 1);
+            animacionEntrada(drop10, 'default', 1, 1);
+        }
+
+        function actividad(){
+            arrastrables.draggable({
+                revert: true,
+                start: function( event, ui ) {
+                    dragSelect = $(this).data('lugar');
+                }
+            });
+
+            drops.droppable({
+                accept: arrastrables,
+                tolerance: "intersect",
+                drop: function( event, ui ) {
+                    dropSelect = $(this).data('lugar');
+                    soltar();
+                }
+            });
+        }
+
+        function soltar(){
+            const dragActivo = $(`#drag${dragSelect}`);
+            const dropActivo = $(`#drop${dropSelect}`);
+
+            if(dragSelect == dropSelect){
+                aciertos++;
+
+                //Sacar el top y el left del drop 
+                const dropTop = dropActivo.css('top');
+                const dropLeft = dropActivo.css('left');
+
+                //Posicionar el drag en el drop
+                dragActivo.css({
+                    'top': dropTop,
+                    'left': dropLeft
+                });
+
+                dragActivo.draggable({
+                    revert: false,
+                });
+                dragActivo.draggable( "disable" );
+                dragActivo.css('cursor', 'default');
+
+                if(aciertos == 10){
+                    aplicacion.terminaPantalla();
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
